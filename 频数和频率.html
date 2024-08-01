@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>频数和频率</title>
+    <style>
+        #content {
+            width: 960px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        #qwe{
+            width: 100px;
+            height: 150px;
+            margin: 0 auto;
+            text-align: center;
+            border: 2px solid yellowgreen;
+            background-color: bisque;
+            margin-top: 20px; 
+        }
+        table{
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+        td{
+            text-align: center;
+            border: solid 1px;
+        }
+        form{
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <input type="button" value="开始游戏" onclick="GameStart()">
+        <input type="button" value="结束游戏" onclick="GameOver()">
+    <div id="qwe" onclick="hit()"></div>
+    <table width="50%" height="195px" id=table1 border="1" text-align="center" cellpadding="0" cellSpacing="0"> 
+        <tr>
+            <td width="34%"id="Ttd0">牌面数字和</td>
+            <td width="22%" id="Ttd1">2</td>
+            <td width="22%"id="Ttd2" >3</td>
+            <td width="22%" id="Ttd3">4</td>
+        </tr>
+        <tr>
+            <td id="Ttd4">频数(次)</td>
+            <td id="Ttd5"></td>
+            <td id="Ttd6"></td>
+            <td id="Ttd7"></td>
+        </tr>
+        <tr>
+            <td id="Ttd8">频率(%)</td>
+            <td id="Ttd9" size="5"></td>
+            <td id="Ttd10"size="5"></td>
+            <td id="Ttd11" size="5"></td>
+            </tr>
+            </table>
+            <form action="" name="form1">
+                <label>实验总数</label>
+    <input type="text" id="oMessage" name="score" value="" size="10">
+    <lable>输入实验总数提示：</lable>
+    <input type="botton" name="remtime"  value="请输入实验总数" size="15" onclick="rdl_doClick();">;
+            </form>
+            <p>注：牌面中代表的是一道计算题，式中左边的数字分别代表不同的两张牌面数字，右边是牌面数字和</p>
+            <img src="http://m.qpic.cn/psc?/V12K1daX3SqAym/ruAMsa53pVQWN7FLK88i5pY0zyiLaOM0ADOzCmDqpZVupCFNvMCa0GwbI*S90W*phAYemXjQdBREJI0km0xBqJ6G7UgF3UwCvk3QlBVb604!/a&rf=albumlist&t=5">
+    </div>
+    <script>
+        var playing=false;
+        var s2=0,s3=0,s4=0;
+        var bast=0,suces2=0,suces3=0,suces4=0;
+        var countDown=0
+        function rdl_doClick(){
+       var oMessage=document.getElementById("oMessage");
+        oMessage.value=window.prompt(oMessage.value,"返回的信息")
+        if(document.form1.score.value!=""){
+            bast=form1.score.value;
+            alert("请点击牌面,测试开始:")
+        }
+        }
+       function GameOver(){
+        playing=false;
+        alert("游戏结束! \n结论：\n 一次实验中两张牌面数字和可能有2，3，4。它们的 \n 频数(次）分别为：\n 牌面数字和为2="+s2+" , 牌面数字和为3="+s3+" ,牌面数字和为4="+s4+"\n 频率(%)分别为: \n 牌面数字和为2="+suces2+", 牌面数字和为3="+suces3+", 牌面数字和为4="+suces4);
+        clearbg();   
+        s2=0;
+        s3=0;
+        s4=0;
+        s5=0;
+        bast=0,suces2=0,suces3=0,suces4=0,suces5=0;
+        countDown=0;
+       }
+ function hit(){
+    if (playing == false) {
+            alert("请点击开始游戏");
+            return;
+        }else{
+    var current1=Math.ceil(Math.random()*2);
+ var current2=Math.ceil(Math.random()*2);
+ var innerHTML=document.getElementById("qwe").innerHTML;
+ countDown+=1;
+ bast=document.form1.score.value
+ if(countDown==bast*2){
+    GameOver() 
+ }  
+if(innerHTML==''){
+    document.getElementById("qwe").style.backgroundImage=''
+   document.getElementById("qwe").innerHTML=String(current1)+"+"+String(current2)+"="+(current1+current2)
+}
+else if(innerHTML != ""){
+    document.getElementById("qwe").innerHTML='';
+    document.getElementById("qwe").style.backgroundImage='url(350.jpg )'
+}
+if(document.getElementById("qwe").innerHTML==String(current1)+"+"+String(current2)+"="+(current1+current2)&&current1+current2==2){
+s2+=1;
+document.getElementById("Ttd5").innerHTML=s2;
+suces2=s2/bast*100;
+document.getElementById("Ttd9").innerHTML=Math.round(suces2);
+}
+if(document.getElementById("qwe").innerHTML==String(current1)+"+"+String(current2)+"="+(current1+current2)&&current1+current2==3){
+    s3+=1;
+    document.getElementById("Ttd6").innerHTML=s3
+    suces3=s3/bast*100;
+document.getElementById("Ttd10").innerHTML=Math.round(suces3); 
+}
+if(document.getElementById("qwe").innerHTML==String(current1)+"+"+String(current2)+"="+(current1+current2)&&current1+current2==4){
+    s4+=1;
+    document.getElementById("Ttd7").innerHTML=s4
+    suces4=s4/bast*100;
+document.getElementById("Ttd11").innerHTML=Math.round(suces4);
+}                     
+}
+ }
+function clearbg() {
+        for (var i = 5; i <= 11; i++) {
+            if(i==8){
+            eval('Ttd'+i).innerHTML = "频率(%)";
+            continue;
+        }
+            eval('Ttd'+i).innerHTML = "";
+        }
+        document.form1.score.value=bast=0
+    }
+function GameStart(){
+    playing=true
+    alert("游戏规则:点击<<測试总数提示对话框>>,输入实验总数,然后点击牌面开始游戏")
+        }
+</script>
+</body>
+    </html>
